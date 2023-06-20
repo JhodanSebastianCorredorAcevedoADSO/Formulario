@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="sp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Formulario</title>
+</head>
+
+<body>
+    <form action="recibir.php" id="form" method="get">
+        <div>
+            <div>
+                <label>Genero</label>
+            </div>
+            <input type="text" id="Genero" name="Genero">
+            <div>
+                <label>Nombre</label>
+            </div>
+            <div>
+                <input type="text" id="Nombre" name="Nombre">
+            </div>
+            <div>
+                <label>Apellido</label>
+            </div>
+            <div>
+                <input type="text" id="Apellido" name="Apellido">
+            </div>
+            <div>
+                <label>Edad</label>
+            </div>
+            <div>
+                <input type="number" id="Edad" name="Edad">
+            </div>
+            <div>
+                <label>Direccion</label>
+            </div>
+            <div>
+                <input type="text" id="Direccion" name="Direccion">
+            </div>
+            <div>
+                <label>Correo</label>
+            </div>
+            <div>
+                <input type="email" id="Correo" name="Correo">
+            </div>
+            <br>
+            <button type="button" onclick="Enviar()">Enviar</button>
+
+            <p id="Mensaje"></p>
+            <p id="N"></p>
+            <p id="A"></p>
+            <p id="E"></p>
+            <p id="C"></p>
+            <p id="D"></p>
+
+        </div>
+
+    </form>
+
+
+    <script>
+        function Enviar() {
+            let Genero = document.getElementById("Genero").value.toLowerCase();
+            let Mensaje = document.getElementById("Mensaje");
+            let N = document.getElementById("N");
+            let A = document.getElementById("A");
+            let E = document.getElementById("E");
+            let C = document.getElementById("C");
+            let D = document.getElementById("D");
+
+            let errores = false;
+
+            let nombre = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+            let apellido = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+            let correo = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            let direccion = /^[a-zA-Z0-9\s\-\.\,]+$/;
+
+            if (Genero !== "hombre" && Genero !== "mujer") {
+                Mensaje.textContent = "El Genero es invalido";
+                errores = true;
+            } else {
+                Mensaje.textContent = "";
+            }
+
+            /*-----------------------------------------------------------------------------------------*/
+
+            let Nombre = document.getElementById("Nombre").value;
+
+            if (!nombre.test(Nombre)) {
+                N.textContent = "El Nombre es requerido";
+                errores = true;
+            } else {
+                N.textContent = "";
+            }
+
+            /*-----------------------------------------------------------------------------------------*/
+
+            let Apellido = document.getElementById("Apellido").value;
+
+            if (!apellido.test(Apellido)) {
+                A.textContent = "El apellido es requerido";
+                errores = true;
+            } else {
+                A.textContent = "";
+            }
+
+            /*-----------------------------------------------------------------------------------------*/
+
+            let Edad = parseInt(document.getElementById("Edad").value);
+
+            if (isNaN(Edad) || Edad <= 0) {
+                E.textContent = "No se puede esa edad";
+                errores = true;
+            } else {
+                E.textContent = "";
+            }
+
+            /*-----------------------------------------------------------------------------------------*/
+
+            let Correo = document.getElementById("Correo").value;
+
+            if (!correo.test(Correo)) {
+                C.textContent = "Ingrese un correo electrónico válido";
+                errores = true;
+            } else {
+                C.textContent = "";
+            }
+
+            /*-----------------------------------------------------------------------------------------*/
+
+            let Direccion = document.getElementById("Direccion").value;
+
+            if (!direccion.test(Direccion)) {
+                D.textContent = "Ingrese una direccion valida";
+                errores = true;
+            } else {
+                D.textContent = "";
+            }
+
+            /*-----------------------------------------------------------------------------------------*/
+
+            if (!errores) {
+                document.getElementById("form").submit();
+            }
+        }
+    </script>
+
+</body>
+
+</html>
